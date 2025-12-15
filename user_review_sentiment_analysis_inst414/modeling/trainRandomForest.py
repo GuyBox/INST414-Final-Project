@@ -6,16 +6,16 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 import pickle
 
 def trainRandomForest():
-    df = pd.read_csv( "data/processed/combined_cleaned.csv" )
+    df = pd.read_csv("data/processed/combined_cleaned.csv")
     
     print( f"Total reviews: {len( df )}" )
-    print( f"NaN in cleanedText: {df['cleanedText'].isna().sum()}" )
+    print( f"NaN in cleanedText: {df['cleanedText'].isna().sum()}")
     print( f"Empty strings: {(df['cleanedText'] == '').sum()}" )
     
-    df = df.dropna( subset = ["cleanedText"] )
+    df = df.dropna(subset = ["cleanedText"])
     df = df[df["cleanedText"] != ""]
     
-    print( f"After cleaning: {len( df )}" )
+    print(f"After cleaning: {len( df )}")
     
     X = df["cleanedText"]
     y = df["rating"]
@@ -24,32 +24,32 @@ def trainRandomForest():
     
     #weights words by their importance
     vectorizer = TfidfVectorizer( max_features = 10000, ngram_range = (1, 2))
-    XTrainVec = vectorizer.fit_transform( XTrain )
-    XTestVec = vectorizer.transform( XTest )
+    XTrainVec = vectorizer.fit_transform(XTrain)
+    XTestVec = vectorizer.transform(XTest)
     
-    print( "Training Random Forest: " )
-    rf = RandomForestClassifier( n_estimators = 50, random_state = 50 )
-    rf.fit( XTrainVec, yTrain )
+    print("Training Random Forest: ")
+    rf = RandomForestClassifier( n_estimators = 50, random_state = 50)
+    rf.fit(XTrainVec, yTrain)
     
-    yPred = rf.predict( XTestVec )
+    yPred = rf.predict(XTestVec)
     
-    accuracy = accuracy_score( yTest, yPred )
-    print( f"\nRandom Forest Accuracy: {accuracy:.4f}" )
+    accuracy = accuracy_score(yTest, yPred)
+    print(f"\nRandom Forest Accuracy: {accuracy:.4f}")
     
-    print( "\nClassification Report: " )
-    print( classification_report( yTest, yPred ) )
+    print("\nClassification Report: ")
+    print(classification_report(yTest, yPred))
     
-    print( "\nConfusion Matrix: " )
-    print( confusion_matrix( yTest, yPred ) )
+    print("\nConfusion Matrix: ")
+    print(confusion_matrix(yTest, yPred))
     
 
-    with open( "models/random_forest_model.pkl", "wb" ) as f:
-        pickle.dump( rf, f )
+    with open("models/random_forest_model.pkl", "wb") as f:
+        pickle.dump(rf, f)
     
     with open( "models/tfidf_vectorizer.pkl", "wb" ) as f:
-        pickle.dump( vectorizer, f )
+        pickle.dump(vectorizer, f)
     
-    print( "\nModel saved to models/random_forest_model.pkl" )
+    print("\nModel saved to models/random_forest_model.pkl")
 
 if __name__ == "__main__":
     trainRandomForest()

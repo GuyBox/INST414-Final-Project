@@ -6,7 +6,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 import pickle
 
 def trainRandomForest():
-    df = pd.read_csv( "data/processed/combined_cleaned.csv" )
+    df = pd.read_csv("data/processed/combined_cleaned.csv")
     
     print(f"Total reviews: {len( df )}")
     print(f"NaN in cleanedText: {df['cleanedText'].isna().sum()}")
