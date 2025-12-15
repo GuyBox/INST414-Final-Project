@@ -6,6 +6,11 @@
 
 User Review Sentiment Analysis Model Exploration
 
+Context:
+Having an understanding of where your customers are via their sentiment on reviews is critical to underline where improvement lies.
+
+The use case would be specifically the scenario where users may leave a review that doesn't reflect their rating. This sentiment analysis should help in predicting their true rating to drive business decisions.
+
 ## Project Organization
 
 ```
@@ -13,7 +18,7 @@ User Review Sentiment Analysis Model Exploration
 ├── Makefile           <- Makefile with convenience commands like `make data` or `make train`
 ├── README.md          <- The top-level README for developers using this project.
 │
-├── models             <- Trained and serialized models, model predictions, or model summaries
+├── models             <- Trained and serialized models, model predictions, or model summaries. (Model file sizes with pickle dumps were too big for github without large file storage)
 │
 ├── pyproject.toml     <- Project configuration file with package metadata for
 │                       user_review_sentiment_analysis_inst414 and configuration for tools like black
