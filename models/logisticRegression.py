@@ -8,14 +8,14 @@ import pickle
 def trainLogisticRegression():
     df = pd.read_csv("data/processed/combined_cleaned.csv")
     
-    print(f"Total reviews: {len( df )}")
+    print(f"Total reviews: {len(df)}")
     
     df = df.dropna(subset = ["cleanedText"])
     df = df[df["cleanedText"] != ""]
     
     df = df.sample(n = 500000, random_state = 50)
     
-    print(f"Using sample: {len( df )}")
+    print(f"Using sample: {len(df)}")
     
     X = df["cleanedText"]
     y = df["rating"]
@@ -27,7 +27,7 @@ def trainLogisticRegression():
     XTestVec = vectorizer.transform(XTest)
     
     print("Training Logistic Regression: ")
-    lr = LogisticRegression( max_iter = 1000, random_state = 50, class_weight = "balanced" )
+    lr = LogisticRegression( max_iter = 1000, random_state = 50, class_weight = "balanced")
     lr.fit(XTrainVec, yTrain)
     
     yPred = lr.predict(XTestVec)
